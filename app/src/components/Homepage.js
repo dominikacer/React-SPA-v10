@@ -1,3 +1,5 @@
+// Homepage Component, just login panel at this moment, in the future dtb && routing
+
 import React, {Component} from 'react';
 
 class Homepage extends React.Component{

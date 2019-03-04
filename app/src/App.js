@@ -1,7 +1,10 @@
+// Import libraries
 import React, { Component } from 'react';
+// Import styles
+import 'bootstrap/dist/css/bootstrap.css';
+// Import own components
 import Homepage from './components/Homepage';
 
-import 'bootstrap/dist/css/bootstrap.css';
 
 class App extends Component {
   render() {

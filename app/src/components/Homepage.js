@@ -1,6 +1,6 @@
 // Homepage Component, just login panel at this moment, in the future dtb & routing
 
-import React, {Component} from 'react';
+import React from 'react';
 
 import styled from 'styled-components';
 
@@ -20,12 +20,15 @@ const StyledInner = styled.div`
 `;
 
 const HomepageTitle = styled.h1`
-    margin: 0 0 20px;
+    margin: 0 0 20px; 
     font-style: italic;
 `;
 
-class Homepage extends Component{
+class Homepage extends React.Component{
     render() {
+
+        const {user} = this.props;
+
         return(
             <div className="container text-center">
                 <div className="row justify-content-center">
@@ -36,15 +39,22 @@ class Homepage extends Component{
                             </HomepageTitle>
 
                             <div className="link-wrapper mt-4">
-                                <a href="/register" className="btn btn-outline-primary mr-2">
-                                    Zarejestruj się
-                                </a>
-                                <a href="/login" className="btn btn-outline-primary mr-2">
-                                    Zaloguj się
-                                </a>
-                                <a href="/meetings" className="btn btn-primary">
-                                    Spotkania
-                                </a>
+
+                                {user == null && (
+                                    <span>
+                                        <a href="/register" className="btn btn-outline-primary mr-2">
+                                            Zarejestruj się
+                                        </a>
+                                        <a href="/login" className="btn btn-outline-primary mr-2">
+                                            Zaloguj się
+                                        </a>
+                                    </span>
+                                )}
+                                {user && (
+                                    <a href="/meetings" className="btn btn-primary">
+                                        Spotkania
+                                    </a>
+                                )}
                             </div>
                         </StyledInner>
                     </FullViewportHeight>

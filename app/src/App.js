@@ -5,13 +5,26 @@ import 'bootstrap/dist/css/bootstrap.css';
 import './index.css';
 
 // Import own components
+import Entry from './components/Entry';
 import Homepage from './components/Homepage';
 
-
 class App extends Component {
+
+  constructor() {
+    super();
+    this.state = {
+      user: 'Doom'
+    }
+  }
+
   render() {
     return (
-        <Homepage />
+        <main>
+          {this.state.user &&
+            <Entry  user={this.state.user}/>
+          }
+          <Homepage  user={this.state.user}/>
+        </main>
     );
   }
 }

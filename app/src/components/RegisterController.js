@@ -1,6 +1,7 @@
 // simple component with entry title based of user name
 
 import React, { Component } from 'react';
+import ErrorController from './ErrorController';
 
 class RegisterController extends Component{
 
@@ -11,7 +12,8 @@ class RegisterController extends Component{
             displayName : '',
             email: '',
             passOne: '',
-            passTwo: ''
+            passTwo: '',
+            error : null
         };
 
         this.changeFieldValue = this.changeFieldValue.bind(this);
@@ -23,7 +25,13 @@ class RegisterController extends Component{
         const value = event.target.value;
 
         // refer to constructor to modify original object
-        this.setState({[name]: value});
+        this.setState({[name]: value}, () => {
+            if (this.state.passOne !== this.state.passTwo){
+                this.setState({error: 'Passwords are not the same'});
+            } else {
+                this.setState({error: null})
+            }
+        });
     }
 
     render(){
@@ -36,6 +44,11 @@ class RegisterController extends Component{
                                 <div className="card-body">
                                     <h3 className="font-weight-light mb-3">Register</h3>
                                     <div className="form-row">
+                                        <p className="text-center">
+                                            {this.state.error !== null ? (
+                                                <ErrorController message={this.state.error}/>
+                                            ) : null }
+                                        </p>
                                         <section className="col-sm-12 form-group">
                                             <label
                                                 className="form-control-label sr-only"

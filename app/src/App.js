@@ -1,6 +1,6 @@
 // Import libraries
 import React, { Component } from 'react';
-import {Router} from '@reach/router';
+import {Router, navigate} from '@reach/router';
 import firebase from './db/DbConnection';
 // Import styles
 import 'bootstrap/dist/css/bootstrap.css';
@@ -19,7 +19,9 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      user: null
+      user: null,
+      displayName: null,
+      userID: null
     }
   }
 
@@ -35,18 +37,34 @@ class App extends Component {
       })
   }
 
+    registerUser = userName => {
+        firebase.auth().onAuthStateChanged(firebase_user => {
+            firebase_user.updateProfile({
+                displayName: userName
+            }).then(() =>{
+                this.setState({
+                    user: firebase_user,
+                    displayName: firebase_user.displayName,
+                    userID : firebase_user.uid
+                });
+                navigate('/meetings');
+            })
+        })
+    };
+
+
     render() {
     return (
         <main>
           <Nav user={this.state.user} />
           {this.state.user &&
-            <Entry  user={this.state.user}/>
+            <Entry user={this.state.displayName}/>
           }
           <Router>
               <Homepage path="/" user={this.state.user} />
               <LoginController path="/login" />
               <MeetingsController path="/meetings" />
-              <RegisterController path="/register" />
+              <RegisterController path="/register" registerUser={this.registerUser} />
           </Router>
         </main>
     );

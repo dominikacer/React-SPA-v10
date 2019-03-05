@@ -2,12 +2,13 @@
 
 import React, { Component } from 'react';
 import ErrorController from './ErrorController';
+import firebase from '../db/DbConnection';
 
 class RegisterController extends Component{
 
     // create constructor for empty objects, which waits for value
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         this.state = {
             displayName : '',
             email: '',
@@ -17,6 +18,7 @@ class RegisterController extends Component{
         };
 
         this.changeFieldValue = this.changeFieldValue.bind(this);
+        this.submitForm = this.submitForm.bind(this);
     }
 
     // set new state
@@ -34,9 +36,35 @@ class RegisterController extends Component{
         });
     }
 
+    submitForm(event){
+        let registered_user = {
+            displayName : this.state.displayName,
+            email : this.state.email,
+            password: this.state.passOne
+        };
+
+        event.preventDefault();
+
+        // push new user to db and handle errors
+        firebase.auth()
+        .createUserWithEmailAndPassword(
+            registered_user.email,
+            registered_user.password
+        ).then(() => {
+            this.props.registerUser(registered_user.displayName);
+        })
+        .catch(error => {
+           if (error.message !== null) {
+               this.setState({error: error.message});
+           } else {
+               this.setState({error: null })
+           }
+        });
+    }
+
     render(){
         return (
-            <form className="mt-3">
+            <form className="mt-3" onSubmit={this.submitForm}>
                 <div className="container">
                     <div className="row justify-content-center">
                         <div className="col-lg-8">
@@ -44,11 +72,11 @@ class RegisterController extends Component{
                                 <div className="card-body">
                                     <h3 className="font-weight-light mb-3">Register</h3>
                                     <div className="form-row">
-                                        <p className="text-center">
+                                        <div className="text-center">
                                             {this.state.error !== null ? (
                                                 <ErrorController message={this.state.error}/>
                                             ) : null }
-                                        </p>
+                                        </div>
                                         <section className="col-sm-12 form-group">
                                             <label
                                                 className="form-control-label sr-only"

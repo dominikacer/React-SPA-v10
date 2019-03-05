@@ -6,7 +6,7 @@ import { Link } from '@reach/router';
 class Entry extends Component{
     render(){
 
-        const { userName } = this.props;
+        const { userName, logOut } = this.props;
 
         return (
             <div>
@@ -14,7 +14,7 @@ class Entry extends Component{
                     <span className="text-secondary font-weight-bold pl-1 pr-1">
                         Welcome {userName},
                     </span>
-                    <Link to="/" className="text-primary font-weight-bold pl-1 pr-1">
+                    <Link to="/login" className="text-primary font-weight-bold pl-1 pr-1" onClick={event => logOut(event)}>
                         log out
                     </Link>
                 </div>

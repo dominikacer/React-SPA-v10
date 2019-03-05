@@ -39,7 +39,6 @@ class App extends Component {
          }
       });
   }
-
     registerUser = userName => {
         firebase.auth().onAuthStateChanged(firebase_user => {
             firebase_user.updateProfile({
@@ -55,13 +54,26 @@ class App extends Component {
         })
     };
 
+    // simple logout fn
+    logOut = event => {
+        event.preventDefault();
+        this.setState({
+            displayName: null,
+            userID : null,
+            user: null
+        });
+
+        firebase.auth().signOut().then(() =>{
+            navigate('/login');
+        });
+    };
 
     render() {
     return (
         <main>
-          <Nav user={this.state.user} />
+          <Nav user={this.state.user} logOut={this.logOut}/>
           {this.state.user &&
-            <Entry user={this.state.displayName}/>
+            <Entry userName={this.state.displayName} logOut={this.logOut} />
           }
           <Router>
               <Homepage path="/" userName={this.state.user} />

@@ -29,12 +29,15 @@ class App extends Component {
   // then add event listener on value and callback function to pass firebase value
   // and then set state to global user variable based on firebase value
   componentDidMount() {
-      const user_ref = firebase.database().ref('user');
-
-      user_ref.on('value', snapshot => {
-          let firebase_user = snapshot.val();
-          this.setState({user:firebase_user});
-      })
+      firebase.auth().onAuthStateChanged(firebase_user => {
+         if (firebase_user){
+             this.setState({
+                user : firebase_user,
+                displayName: firebase_user.displayName,
+                userID : firebase_user.uid
+             });
+         }
+      });
   }
 
     registerUser = userName => {
@@ -61,7 +64,7 @@ class App extends Component {
             <Entry user={this.state.displayName}/>
           }
           <Router>
-              <Homepage path="/" user={this.state.user} />
+              <Homepage path="/" userName={this.state.user} />
               <LoginController path="/login" />
               <MeetingsController path="/meetings" />
               <RegisterController path="/register" registerUser={this.registerUser} />

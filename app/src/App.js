@@ -5,6 +5,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import './index.css';
 
 // Import own components
+import Nav from './components/Nav';
 import Entry from './components/Entry';
 import Homepage from './components/Homepage';
 
@@ -20,6 +21,7 @@ class App extends Component {
   render() {
     return (
         <main>
+          <Nav user={this.state.user} />
           {this.state.user &&
             <Entry  user={this.state.user}/>
           }

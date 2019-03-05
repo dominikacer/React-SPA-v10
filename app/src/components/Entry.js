@@ -1,6 +1,7 @@
 // simple component with entry title based of user name
 
 import React, { Component } from 'react';
+import { Link } from '@reach/router';
 
 class Entry extends Component{
     render(){
@@ -13,9 +14,9 @@ class Entry extends Component{
                     <span className="text-secondary font-weight-bold pl-1 pr-1">
                         Welcome {user},
                     </span>
-                    <a href="/" className="text-primary font-weight-bold pl-1 pr-1">
+                    <Link to="/" className="text-primary font-weight-bold pl-1 pr-1">
                         log out
-                    </a>
+                    </Link>
                 </div>
             </div>
         )

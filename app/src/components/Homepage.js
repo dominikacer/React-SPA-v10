@@ -1,6 +1,7 @@
 // Homepage Component, just login panel at this moment, in the future dtb & routing
 
 import React from 'react';
+import { Link } from '@reach/router';
 
 import styled from 'styled-components';
 
@@ -42,18 +43,18 @@ class Homepage extends React.Component{
 
                                 {user == null && (
                                     <span>
-                                        <a href="/register" className="btn btn-outline-primary mr-2">
+                                        <Link to="/register" className="btn btn-outline-primary mr-2">
                                             Zarejestruj się
-                                        </a>
-                                        <a href="/login" className="btn btn-outline-primary mr-2">
+                                        </Link>
+                                        <Link to="/login" className="btn btn-outline-primary mr-2">
                                             Zaloguj się
-                                        </a>
+                                        </Link>
                                     </span>
                                 )}
                                 {user && (
-                                    <a href="/meetings" className="btn btn-primary">
+                                    <Link to="/meetings" className="btn btn-primary">
                                         Spotkania
-                                    </a>
+                                    </Link>
                                 )}
                             </div>
                         </StyledInner>

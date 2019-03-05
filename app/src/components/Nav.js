@@ -2,6 +2,7 @@
 
 import React, { Component } from 'react';
 import {FaUsers} from 'react-icons/fa';
+import {Link} from '@reach/router';
 
 class Nav extends Component {
     render(){
@@ -11,29 +12,29 @@ class Nav extends Component {
         return (
             <div className="container-fluid bg-primary">
                 <nav className="site-nav navbar navbar-expand navbar-dark higher container">
-                    <a href="/" className="navbar-brand">
+                    <Link to="/" className="navbar-brand">
                         <FaUsers className="mr-1"/>Meeting Log
-                    </a>
+                    </Link>
                     <div className="navbar-nav ml-auto">
                         {user && (
-                            <a className="nav-item nav-link" href="/meetings">
+                            <Link className="nav-item nav-link" to="/meetings">
                                 meetings
-                            </a>
+                            </Link>
                         )}
                         {!user &&(
                             <span>
-                                <a className="nav-item nav-link" href="/login">
+                                <Link className="nav-item nav-link" to="/login">
                                     log in
-                                </a>
-                                <a className="nav-item nav-link" href="/register">
+                                </Link>
+                                <Link className="nav-item nav-link" to="/register">
                                     register
-                                </a>
+                                </Link>
                             </span>
                         )}
                         {user && (
-                            <a className="nav-item nav-link" href="/login">
+                            <Link className="nav-item nav-link" to="/login">
                                 log out
-                            </a>
+                            </Link>
                         )}
                     </div>
                 </nav>

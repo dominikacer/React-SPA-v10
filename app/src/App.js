@@ -105,7 +105,11 @@ class App extends Component {
           <Router>
               <Homepage path="/" userName={this.state.user} />
               <LoginController path="/login" />
-              <MeetingsController path="/meetings" addMeeting={this.addMeeting}/>
+              <MeetingsController
+                  path="/meetings"
+                  addMeeting={this.addMeeting}
+                  meetings={this.state.meetings}
+                  userID={this.state.userID} />
               <RegisterController path="/register" registerUser={this.registerUser} />
           </Router>
         </main>

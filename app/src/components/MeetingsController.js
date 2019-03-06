@@ -1,6 +1,7 @@
 // simple component with entry title based of user name
 
 import React, { Component } from 'react';
+import SingleMeeting from './SingleMeeting';
 // import firebase from "../db/DbConnection";
 // import {navigate} from "@reach/router";
 
@@ -71,6 +72,26 @@ class MeetingsController extends Component{
                                     </div>
                                 </div>
                             </div>
+
+                            <div className="col-11 col-md-6 text-center">
+                                <div className="card border-top0 rounded-0 mt-4">
+                                    {this.props.meetings && this.props.meetings.length ? (
+                                        <div className="card-body py-2">
+                                            <h4 className="card-title font-weight-light m-0">
+                                                Your Meetings
+                                            </h4>
+                                        </div>
+                                    ) : null}
+
+                                    {this.props.meetings && (
+                                        <div className="list-group list-group-flush">
+                                            <SingleMeeting meetings={this.props.meetings} userID={this.props.userID} />
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
+
+
                         </div>
                     </div>
                 </div>

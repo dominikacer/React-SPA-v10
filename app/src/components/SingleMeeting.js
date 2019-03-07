@@ -3,6 +3,8 @@
 import React, { Component } from 'react';
 import firebase from '../db/DbConnection';
 import {GoTrashcan} from 'react-icons/go'
+import {FaLink, GoListUnordered} from 'react-icons/fa'
+import {navigate} from '@reach/router'
 
 class SingleMeeting extends Component{
     
@@ -28,6 +30,14 @@ class SingleMeeting extends Component{
                     <section className="btn-group align-self-center" role="group">
                         <button className="btn btn-sm btn-outline-secondary" onClick={event => this.deleteItem(event, item.meetingID)}>
                             <GoTrashcan />
+                        </button>
+
+                        <button className="btn btn-sm btn-outline-secondary" onClick={ () => navigate(`/checkin/${this.props.userID}/${item.meetingID}`)}>
+                            <FaLink />
+                        </button>
+
+                        <button className="btn btn-sm btn-outline-secondary" onClick={ () => navigate(`/attendees/${this.props.userID}/${item.meetingID}`)}>
+                            <GoListUnordered />
                         </button>
                     </section>
 

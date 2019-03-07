@@ -12,6 +12,8 @@ import LoginController from './components/LoginController';
 import RegisterController from './components/RegisterController';
 import MeetingsController from './components/MeetingsController';
 import Homepage from './components/Homepage';
+import CheckinController from './components/CheckinController';
+import Attendees from './components/Attendees';
 // Db connection
 
 class App extends Component {
@@ -110,6 +112,10 @@ class App extends Component {
                   addMeeting={this.addMeeting}
                   meetings={this.state.meetings}
                   userID={this.state.userID} />
+                  <Attendees
+                      path="/attendees/:userID/:meetingsID"
+                      adminUser={this.state.userID} />
+              <CheckinController path="/checkin/:userID/:meetingID" />
               <RegisterController path="/register" registerUser={this.registerUser} />
           </Router>
         </main>

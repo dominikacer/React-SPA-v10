@@ -1,18 +1,20 @@
 import React, { Component } from 'react';
 import firebase from '../db/DbConnection';
 import AttendeesController from './AttendeesController';
-import {FaUndo} from 'react-icons/fa';
+import {FaUndo, FaRandom} from 'react-icons/fa';
 
 class Attendees extends Component {
     constructor(props) {
         super(props);
         this.state = {
             displayAttendees: [],
-            searchQuery : ''
+            searchQuery : '',
+            allAttendees: []
         };
 
         this.handleChange = this.handleChange.bind(this);
         this.resetQuery = this.resetQuery.bind(this);
+        this.chooseRandom = this.chooseRandom.bind(this);
     }
 
     componentDidMount() {
@@ -39,6 +41,7 @@ class Attendees extends Component {
                 });
             }
             this.setState({
+                allAttendees: attendeesList,
                 displayAttendees: attendeesList
             });
         });
@@ -54,9 +57,18 @@ class Attendees extends Component {
 
     resetQuery(){
         this.setState({
+            displayAttendees : this.state.allAttendees,
           searchQuery: ''
         })
     };
+
+    chooseRandom(){
+        const randomAttendee = Math.floor(Math.random() * this.state.allAttendees.length);
+        this.resetQuery();
+        this.setState({
+           displayAttendees: [this.state.allAttendees[randomAttendee]]
+        });
+    }
 
     render() {
 
@@ -77,6 +89,9 @@ class Attendees extends Component {
                                     <div className="input-group-append">
                                         <button className="btn btn-sm btn-outline-info" onClick={() => this.resetQuery()}>
                                             <FaUndo/>
+                                        </button>
+                                        <button className="btn btn-sm btn-outline-info" onClick={() => this.chooseRandom()}>
+                                            <FaRandom/>
                                         </button>
                                     </div>
                                 </div>

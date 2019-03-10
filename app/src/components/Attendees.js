@@ -29,7 +29,8 @@ class Attendees extends Component {
                 attendeesList.push({
                     attendeeID: item,
                     attendeeName: attendees[item].attendeeName,
-                    attendeeEmail: attendees[item].attendeeEmail
+                    attendeeEmail: attendees[item].attendeeEmail,
+                    starRating : attendees[item].starRating
                 });
             }
             this.setState({

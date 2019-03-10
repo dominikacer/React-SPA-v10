@@ -33,7 +33,8 @@ class CheckinController extends Component{
         const ref = firebase.database().ref(`meetings/${this.props.userID}/${this.props.meetingID}/attendees`);
         ref.push({
             attendeeName : this.state.displayName,
-            attendeeEmail : this.state.email
+            attendeeEmail : this.state.email,
+            starRating : false
         });
         navigate(`/attendees/${this.props.userID}/${this.props.meetingID}`);
     }

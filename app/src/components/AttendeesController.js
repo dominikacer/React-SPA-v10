@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import firebase from '../db/DbConnection';
-import {GoTrashcan} from 'react-icons/go';
+import {GoTrashcan, GoStar} from 'react-icons/go';
 
 class AttendeesList extends Component {
     constructor(props) {
@@ -18,6 +18,20 @@ class AttendeesList extends Component {
         ref.remove();
     };
 
+    toggleStar = (event, starRating, whichMeeting, whichAttendee) => {
+        event.preventDefault();
+        const adminUser = this.props.adminUser;
+        const ref = firebase.database().ref(`meetings/${adminUser}/${whichMeeting}/attendees/${whichAttendee}/starRating`);
+
+        if(starRating === undefined) {
+            ref.set(true);
+        } else {
+            ref.set(!starRating);
+        }
+
+
+    };
+
     render() {
         const admin = this.props.adminUser === this.props.userID ? true : false;
         const attendees = this.props.attendees;
@@ -33,6 +47,9 @@ class AttendeesList extends Component {
                                <div className={'btn btn-group pr-2'}>
                                    <button className={'btn btn-sm btn-outline-secondary'} onClick={event => this.deleteAttendee(event, this.props.meetingID, item.attendeeID)}>
                                         <GoTrashcan />
+                                   </button>
+                                   <button className={'btn btn-sm ' + (item.starRating ? 'btn-info' : 'btn-outline-secondary')} onClick={event => this.toggleStar(event, item.starRating, this.props.meetingID, item.attendeeID)}>
+                                       <GoStar />
                                    </button>
                                </div>
                            )}

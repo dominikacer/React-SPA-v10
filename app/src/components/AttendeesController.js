@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import firebase from '../db/DbConnection';
-import {GoTrashcan, GoStar} from 'react-icons/go';
+import {GoTrashcan, GoStar, GoMail} from 'react-icons/go';
 
 class AttendeesList extends Component {
     constructor(props) {
@@ -48,6 +48,9 @@ class AttendeesList extends Component {
                                    <button className={'btn btn-sm btn-outline-secondary'} onClick={event => this.deleteAttendee(event, this.props.meetingID, item.attendeeID)}>
                                         <GoTrashcan />
                                    </button>
+                                   <a href={`mailto:${item.attendeeEmail}`} className="btn btn-sm btn-outline-secondary">
+                                       <GoMail />
+                                   </a>
                                    <button className={'btn btn-sm ' + (item.starRating ? 'btn-info' : 'btn-outline-secondary')} onClick={event => this.toggleStar(event, item.starRating, this.props.meetingID, item.attendeeID)}>
                                        <GoStar />
                                    </button>

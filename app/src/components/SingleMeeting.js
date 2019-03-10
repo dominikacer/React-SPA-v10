@@ -2,8 +2,8 @@
 
 import React, { Component } from 'react';
 import firebase from '../db/DbConnection';
-import {GoTrashcan} from 'react-icons/go'
-import {FaLink, GoListUnordered} from 'react-icons/fa'
+import {GoTrashcan, GoListUnordered} from 'react-icons/go'
+import {FaLink} from 'react-icons/fa'
 import {navigate} from '@reach/router'
 
 class SingleMeeting extends Component{

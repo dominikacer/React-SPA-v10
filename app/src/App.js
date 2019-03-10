@@ -1,6 +1,7 @@
 // Import libraries
 import React, { Component } from 'react';
 import {Router, navigate} from '@reach/router';
+// Db connection
 import firebase from './db/DbConnection';
 // Import styles
 import 'bootstrap/dist/css/bootstrap.css';
@@ -14,7 +15,6 @@ import MeetingsController from './components/MeetingsController';
 import Homepage from './components/Homepage';
 import CheckinController from './components/CheckinController';
 import Attendees from './components/Attendees';
-// Db connection
 
 class App extends Component {
 
@@ -112,9 +112,9 @@ class App extends Component {
                   addMeeting={this.addMeeting}
                   meetings={this.state.meetings}
                   userID={this.state.userID} />
-                  <Attendees
-                      path="/attendees/:userID/:meetingsID"
-                      adminUser={this.state.userID} />
+              <Attendees
+                  path="/attendees/:userID/:meetingID"
+                  adminUser={this.state.userID} />
               <CheckinController path="/checkin/:userID/:meetingID" />
               <RegisterController path="/register" registerUser={this.registerUser} />
           </Router>

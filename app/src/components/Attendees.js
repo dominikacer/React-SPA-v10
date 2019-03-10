@@ -1,13 +1,18 @@
 import React, { Component } from 'react';
 import firebase from '../db/DbConnection';
 import AttendeesController from './AttendeesController';
+import {FaUndo} from 'react-icons/fa';
 
 class Attendees extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            displayAttendees: []
+            displayAttendees: [],
+            searchQuery : ''
         };
+
+        this.handleChange = this.handleChange.bind(this);
+        this.resetQuery = this.resetQuery.bind(this);
     }
 
     componentDidMount() {
@@ -39,7 +44,25 @@ class Attendees extends Component {
         });
     }
 
+    handleChange(event){
+        const name = event.target.name;
+        const value = event.target.value;
+
+        // refer to constructor to modify original object
+        this.setState({[name]: value});
+    };
+
+    resetQuery(){
+        this.setState({
+          searchQuery: ''
+        })
+    };
+
     render() {
+
+        const dataFilter = item => item.attendeeName.toLowerCase().match(this.state.searchQuery.toLowerCase()) && true;
+        const filteredAttendees = this.state.displayAttendees.filter(dataFilter);
+
         return (
             <div className="container mt-4">
                 <div className="row justify-content-center">
@@ -47,13 +70,26 @@ class Attendees extends Component {
                         <h1 className="font-weight-light text-center">
                             Attendees
                         </h1>
+                        <div className="card bg-light mb-4">
+                            <div className="card-body text-center">
+                                <div className="input-group input-group-lg">
+                                    <input type="text" name="searchQuery" value={this.state.searchQuery} placeholder="Search..." className="form-control" onChange={this.handleChange} />
+                                    <div className="input-group-append">
+                                        <button className="btn btn-sm btn-outline-info" onClick={() => this.resetQuery()}>
+                                            <FaUndo/>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <AttendeesController
                     userID={this.props.userID}
                     meetingID={this.props.meetingID}
                     adminUser={this.props.adminUser}
-                    attendees={this.state.displayAttendees}
+                    attendees={filteredAttendees}
+
                 />
             </div>
         );

@@ -1,16 +1,16 @@
 // simple component with entry title based of user name
 
 import React, { Component } from 'react';
-import SingleMeeting from './SingleMeeting';
+import SingleSong from './SingleSong';
 // import firebase from "../db/DbConnection";
 // import {navigate} from "@reach/router";
 
-class MeetingsController extends Component{
+class ArtistsController extends Component{
 
     constructor(props){
         super(props);
         this.state = {
-            meetingName: '',
+            artistName: '',
             error : null
         };
 
@@ -31,8 +31,8 @@ class MeetingsController extends Component{
     submitForm(event){
         event.preventDefault();
 
-        this.props.addMeeting(this.state.meetingName);
-        this.setState({meetingName : ''});
+        this.props.addArtist(this.state.artistName);
+        this.setState({artistName : ''});
     }
 
     render(){
@@ -42,7 +42,7 @@ class MeetingsController extends Component{
                     <div className="container mt-4">
                         <div className="row justify-content-center">
                             <div className="col-md-8 text-center">
-                                <h1 className="font-weight-light">Add a Meeting</h1>
+                                <h1 className="font-weight-light">Add an artist</h1>
                                 <div className="card bg-light">
                                     <div className="card-body text-center">
                                         <form
@@ -52,10 +52,10 @@ class MeetingsController extends Component{
                                                 <input
                                                     type="text"
                                                     className="form-control"
-                                                    name="meetingName"
-                                                    placeholder="Meeting name"
+                                                    name="artistName"
+                                                    placeholder="Artist name"
                                                     aria-describedby="buttonAdd"
-                                                    value={this.state.meetingName}
+                                                    value={this.state.artistName}
                                                     onChange={this.changeFieldValue}
                                                 />
                                                 <div className="input-group-append">
@@ -75,17 +75,17 @@ class MeetingsController extends Component{
 
                             <div className="col-11 col-md-6 text-center">
                                 <div className="card border-top0 rounded-0 mt-4">
-                                    {this.props.meetings && this.props.meetings.length ? (
+                                    {this.props.artists && this.props.artists.length ? (
                                         <div className="card-body py-2">
                                             <h4 className="card-title font-weight-light m-0">
-                                                Your Meetings
+                                                Your Artists
                                             </h4>
                                         </div>
                                     ) : null}
 
-                                    {this.props.meetings && (
+                                    {this.props.artists && (
                                         <div className="list-group list-group-flush">
-                                            <SingleMeeting meetings={this.props.meetings} userID={this.props.userID} />
+                                            <SingleSong artists={this.props.artists} userID={this.props.userID} />
                                         </div>
                                     )}
                                 </div>
@@ -100,4 +100,4 @@ class MeetingsController extends Component{
     }
 }
 
-export default MeetingsController;
+export default ArtistsController;

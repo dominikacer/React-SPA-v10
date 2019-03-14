@@ -11,10 +11,10 @@ import Nav from './components/Nav';
 import Entry from './components/Entry';
 import LoginController from './components/LoginController';
 import RegisterController from './components/RegisterController';
-import MeetingsController from './components/MeetingsController';
+import ArtistsController from './components/ArtistsController';
 import Homepage from './components/Homepage';
-import CheckinController from './components/CheckinController';
-import Attendees from './components/Attendees';
+import AddSongController from './components/AddSongController';
+import Songs from './components/Songs';
 
 class App extends Component {
 
@@ -39,22 +39,22 @@ class App extends Component {
                 userID : firebase_user.uid
              });
 
-             const meetingsRef = firebase.database().ref('meetings/'+ firebase_user.uid);
+             const artistsRef = firebase.database().ref('artists/'+ firebase_user.uid);
 
-             meetingsRef.on('value', snapshot => {
-                 let meetings = snapshot.val();
-                 let meetingsList = [];
+             artistsRef.on('value', snapshot => {
+                 let artists = snapshot.val();
+                 let artistsList = [];
 
-                 for (let item in meetings){
-                     meetingsList.push({
+                 for (let item in artists){
+                     artistsList.push({
                          meetingID : item,
-                         meetingName: meetings[item].meetingName
+                         artistName: artists[item].artistName
                      })
                  }
 
                  this.setState({
-                     meetings : meetingsList,
-                     howManyMeetings : meetingsList.length
+                     artists : artistsList,
+                     howManyartists : artistsList.length
                  });
 
              });
@@ -73,7 +73,7 @@ class App extends Component {
                     displayName: firebase_user.displayName,
                     userID : firebase_user.uid
                 });
-                navigate('/meetings');
+                navigate('/artists');
             })
         })
     };
@@ -92,9 +92,9 @@ class App extends Component {
         });
     };
 
-    addMeeting = meetingName => {
-      const ref = firebase.database().ref(`meetings/${this.state.user.uid}`);
-      ref.push({meetingName: meetingName});
+    addArtist = artistName => {
+      const ref = firebase.database().ref(`artists/${this.state.user.uid}`);
+      ref.push({artistName: artistName});
     };
 
     render() {
@@ -107,15 +107,15 @@ class App extends Component {
           <Router>
               <Homepage path="/" userName={this.state.user} />
               <LoginController path="/login" />
-              <MeetingsController
-                  path="/meetings"
-                  addMeeting={this.addMeeting}
-                  meetings={this.state.meetings}
+              <ArtistsController
+                  path="/artists"
+                  addArtist={this.addArtist}
+                  artists={this.state.artists}
                   userID={this.state.userID} />
-              <Attendees
+              <Songs
                   path="/attendees/:userID/:meetingID"
                   adminUser={this.state.userID} />
-              <CheckinController path="/checkin/:userID/:meetingID" />
+              <AddSongController path="/checkin/:userID/:meetingID" />
               <RegisterController path="/register" registerUser={this.registerUser} />
           </Router>
         </main>

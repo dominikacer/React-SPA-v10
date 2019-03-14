@@ -30,10 +30,10 @@ class CheckinController extends Component{
     submitForm(event){
         event.preventDefault();
 
-        const ref = firebase.database().ref(`meetings/${this.props.userID}/${this.props.meetingID}/attendees`);
+        const ref = firebase.database().ref(`artists/${this.props.userID}/${this.props.meetingID}/attendees`);
         ref.push({
-            attendeeName : this.state.displayName,
-            attendeeEmail : this.state.email,
+            songName : this.state.displayName,
+            songLink : this.state.email,
             starRating : false
         });
         navigate(`/attendees/${this.props.userID}/${this.props.meetingID}`);
@@ -49,14 +49,14 @@ class CheckinController extends Component{
                            <div className="col-lg-6">
                                <div className="card bg-light">
                                    <div className="card-body">
-                                       <h3 className="font-weight-light mb-3">Check in</h3>
+                                       <h3 className="font-weight-light mb-3">Song title</h3>
                                        <section className="form-group">
                                            <label
                                                className="form-control-label sr-only"
                                                htmlFor="displayName"
 
                                            >
-                                               Name
+                                               Title
                                            </label>
                                            <input
                                                required
@@ -64,7 +64,7 @@ class CheckinController extends Component{
                                                type="text"
                                                id="displayName"
                                                name="displayName"
-                                               placeholder="Name"
+                                               placeholder="Title"
                                                value={this.state.displayName}
                                                onChange={this.changeFieldValue}
                                            />
@@ -74,22 +74,22 @@ class CheckinController extends Component{
                                                className="form-control-label sr-only"
                                                htmlFor="Email"
                                            >
-                                               Email
+                                               Link
                                            </label>
                                            <input
                                                required
                                                className="form-control"
-                                               type="email"
+                                               type="text"
                                                id="email"
                                                name="email"
-                                               placeholder="Email"
+                                               placeholder="Link"
                                                value={this.state.email}
                                                onChange={this.changeFieldValue}
                                            />
                                        </section>
                                        <div className="form-group text-right mb-0">
                                            <button className="btn btn-primary" type="submit">
-                                               Check in
+                                               add song
                                            </button>
                                        </div>
                                    </div>

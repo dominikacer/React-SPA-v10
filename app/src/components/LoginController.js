@@ -43,7 +43,7 @@ class LoginController extends Component{
                 registered_user.email,
                 registered_user.password
             ).then(() => {
-                navigate('/meetings');
+                navigate('/artists');
             })
             .catch(error => {
                 if (error.message !== null) {

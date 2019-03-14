@@ -36,7 +36,7 @@ class Homepage extends React.Component{
                     <FullViewportHeight>
                         <StyledInner  className="col-xs-6">
                             <HomepageTitle className="display-4 text-primary mt-4 mb-2">
-                                Tablica Spotkań
+                                Save Your Favourites songs
                             </HomepageTitle>
 
                             <div className="link-wrapper mt-4">
@@ -44,15 +44,15 @@ class Homepage extends React.Component{
                                 {user == null && (
                                     <span>
                                         <Link to="/register" className="btn btn-outline-primary mr-2">
-                                            Zarejestruj się
+                                            Register
                                         </Link>
                                         <Link to="/login" className="btn btn-outline-primary mr-2">
-                                            Zaloguj się
+                                            Log in
                                         </Link>
                                     </span>
                                 )}
                                 {user && (
-                                    <Link to="/meetings" className="btn btn-primary">
+                                    <Link to="/artists" className="btn btn-primary">
                                         Spotkania
                                     </Link>
                                 )}

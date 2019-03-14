@@ -1,7 +1,7 @@
 // simple navigation based on user variable, if exists or not
 
 import React, { Component } from 'react';
-import {FaUsers} from 'react-icons/fa';
+import {IoIosRadio} from 'react-icons/io';
 import {Link} from '@reach/router';
 
 class Nav extends Component {
@@ -10,15 +10,15 @@ class Nav extends Component {
         const {user, logOut} = this.props;
 
         return (
-            <div className="container-fluid bg-primary">
+            <div className="container bg-primary">
                 <nav className="site-nav navbar navbar-expand navbar-dark higher container">
                     <Link to="/" className="navbar-brand">
-                        <FaUsers className="mr-1"/>Meeting Log
+                        <IoIosRadio className="mr-3"/>Dashboard
                     </Link>
                     <div className="navbar-nav ml-auto">
                         {user && (
-                            <Link className="nav-item nav-link" to="/meetings">
-                                meetings
+                            <Link className="nav-item nav-link" to="/artists">
+                                artists
                             </Link>
                         )}
                         {!user &&(

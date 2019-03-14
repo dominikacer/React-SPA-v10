@@ -21,7 +21,7 @@ class Attendees extends Component {
         const ref = firebase
             .database()
             .ref(
-                `meetings/${this.props.userID}/${
+                `artists/${this.props.userID}/${
                     this.props.meetingID
                     }/attendees`
             );
@@ -35,8 +35,8 @@ class Attendees extends Component {
             for (let item in attendees) {
                 attendeesList.push({
                     attendeeID: item,
-                    attendeeName: attendees[item].attendeeName,
-                    attendeeEmail: attendees[item].attendeeEmail,
+                    songName: attendees[item].songName,
+                    songLink: attendees[item].songLink,
                     starRating : attendees[item].starRating
                 });
             }
@@ -72,7 +72,7 @@ class Attendees extends Component {
 
     render() {
 
-        const dataFilter = item => item.attendeeName.toLowerCase().match(this.state.searchQuery.toLowerCase()) && true;
+        const dataFilter = item => item.songName.toLowerCase().match(this.state.searchQuery.toLowerCase()) && true;
         const filteredAttendees = this.state.displayAttendees.filter(dataFilter);
 
         return (
@@ -80,7 +80,7 @@ class Attendees extends Component {
                 <div className="row justify-content-center">
                     <div className="col-md-8">
                         <h1 className="font-weight-light text-center">
-                            Attendees
+                            Your Songs
                         </h1>
                         <div className="card bg-light mb-4">
                             <div className="card-body text-center">

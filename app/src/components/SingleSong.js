@@ -15,14 +15,14 @@ class SingleMeeting extends Component{
     
     deleteItem = (event, whichItem) => {
         event.preventDefault();
-        const ref = firebase.database().ref(`meetings/${this.props.userID}/${whichItem}`);
+        const ref = firebase.database().ref(`artists/${this.props.userID}/${whichItem}`);
         ref.remove();
     };
     
     render(){
 
-        const { meetings } = this.props;
-        const single_meeting = meetings.map(item => {
+        const { artists } = this.props;
+        const single_meeting = artists.map(item => {
 
             return(
                 <div className="list-group-item d-flex" key={item.meetingID}>
@@ -42,7 +42,7 @@ class SingleMeeting extends Component{
                     </section>
 
                     <section className="pl-3 text-left align-self-center ">
-                        {item.meetingName}
+                        {item.artistName}
                     </section>
                 </div>
             )

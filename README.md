@@ -1,3 +1,5 @@
-## Git init
+## Rozwijanie aplikacji mobilnych
 
-init commit
+autor: Dominik Michalik <br/>
+mail: dominikxmichalik@gmail.com <br />
+build: https://react-v2-cd7a2.firebaseapp.com/ 

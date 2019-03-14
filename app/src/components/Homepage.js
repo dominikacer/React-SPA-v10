@@ -53,7 +53,7 @@ class Homepage extends React.Component{
                                 )}
                                 {user && (
                                     <Link to="/artists" className="btn btn-primary">
-                                        Spotkania
+                                        Artyści
                                     </Link>
                                 )}
                             </div>

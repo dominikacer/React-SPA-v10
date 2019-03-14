@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import firebase from '../db/DbConnection';
-import AttendeesController from './AttendeesController';
+import SongsController from './SongsController';
 import {FaUndo, FaRandom} from 'react-icons/fa';
 
-class Attendees extends Component {
+class Songs extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -73,7 +73,7 @@ class Attendees extends Component {
     render() {
 
         const dataFilter = item => item.songName.toLowerCase().match(this.state.searchQuery.toLowerCase()) && true;
-        const filteredAttendees = this.state.displayAttendees.filter(dataFilter);
+        const filteredSongs = this.state.displayAttendees.filter(dataFilter);
 
         return (
             <div className="container mt-4">
@@ -99,11 +99,11 @@ class Attendees extends Component {
                         </div>
                     </div>
                 </div>
-                <AttendeesController
+                <SongsController
                     userID={this.props.userID}
                     meetingID={this.props.meetingID}
                     adminUser={this.props.adminUser}
-                    attendees={filteredAttendees}
+                    attendees={filteredSongs}
 
                 />
             </div>
@@ -111,4 +111,4 @@ class Attendees extends Component {
     }
 }
 
-export default Attendees;
+export default Songs;

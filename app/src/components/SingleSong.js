@@ -6,7 +6,7 @@ import {GoTrashcan, GoListUnordered} from 'react-icons/go'
 import {FaLink} from 'react-icons/fa'
 import {navigate} from '@reach/router'
 
-class SingleMeeting extends Component{
+class SingleSong extends Component{
     
     constructor(props){
         super(props);
@@ -56,4 +56,4 @@ class SingleMeeting extends Component{
     }
 }
 
-export default SingleMeeting;
+export default SingleSong;
